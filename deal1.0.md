@@ -138,7 +138,7 @@ Information about the selection and organization of inventory using technology a
 | Attribute | Type | Description |
 |-----------|------|-------------|
 | `curator` | string | Canonical domain of the business entity that did the packaging of inventory, technology and/or data. Most often, this will be the seller of the deal. |
-| `curationfee` | int | Fee type being applied for curation of the deal:<br> `0` = undisclosed<br> `1` = percentage of spend<br> `2` = flat fee<br> `3` = CPM<br> `4` = no fee is paid for curation services<br>[See Implementation Guidance for additional detail](#curation-fee) |
+| `curfeetype` | int | Fee type being applied for curation of the deal:<br> `0` = undisclosed<br> `1` = percentage of spend<br> `2` = flat fee<br> `3` = CPM<br> `4` = no fee is paid for curation services<br>[See Implementation Guidance for additional detail](#curation-fee) |
 | `ext` | object | Placeholder for deal-specific extensions |
 
 ---
