@@ -83,6 +83,7 @@ This API has multiple implications including lowering manual entry by making the
 |-----------|------|-------------|
 | `id` | string; **required** | A unique identifier for the direct deal in origin's namespace. |
 | `name` | string, recommended | Name of the deal as created in the origin system. Note: This name may be displayed to the buyer. The person inputting the deal into the `origin` system should consider that when setting up the deal. |
+| `created` | string | UTC timestamp in seconds in ISO-8601 of when the deal was created in the Origin system |
 | `sellerstatus` | int, default 0, recommended | Status of the deal in the sellers system where:<br> `0` = deal is active<br> `1` = deal is paused<br> `2` = deal is archived (cannot be active again) |
 | `buyerstatus` | object | Information about the status of the deal at a seat level in the buying system. See [Object: BuyerStatus](#object-buyerstatus) for additional information. |
 | `origin` | string, **required** | The advertising system domain of the business entity that will receive bid responses for the deal, typically the SSP hosting the API. |
@@ -109,6 +110,7 @@ This API has multiple implications including lowering manual entry by making the
 | `countries` | string array | An array of country codes in which the deal is available, where country code is a string using ISO-3166-3. If this is empty or missing, the deal is assumed to apply to all countries. |
 | `dealfloor` | float | Minimum bid for impressions for this deal expressed in CPM. Unless `pricetype` is Fixed, this should be used as guidance to buyers. [See Implementation Guidance for additional detail](#price-and-floor-guidance) |
 | `cur` | string; default "USD" | Bid currency using ISO-4217 alpha codes. |
+| `guar` | indicates if the deal is guaranteed where `0` = Guaranteed and `1` = Not Guaranteed |
 | `pricetype` | int, default 2 | Deal Price Type where:<br> `0` = Dynamic (ie. auction type will be provided by `request.at` attribute in OpenRTB Bid Request)<br> `1` = First Price<br> `2` = Second Price Plus<br> `3` = Fixed Price<br>Exchange-specific auction types can be defined using values 500 and greater. |
 | `units` | int | Number of units (impressions) over the specified start and end date of the deal. If the deal is guaranteed, this number should be provided. If the deal is not guaranteed this may be omitted. |
 | `totalcost` | float | The total cost over the specified start and end date of the deal. If the deal is guaranteed, this value should be provided. If the deal is not guaranteed this may be omitted. [See Implementation Guidance for additional detail](#price-and-floor-guidance) |
