@@ -13,8 +13,8 @@
   - [Object: Inventory](#object-inventory)
   - [Object: Curation](#object-curation)
 - [GET Call](#get-call)
-  - [Object: BuyerStatus](#object-buyerstatus)
   - [Object: BuyerSeat](#object-buyerseat)
+  - [Object: BuyerStatus](#object-buyerstatus)
 - [Implementation Guidance](#implementation-guidance)
   - [Matching Bid Requests to Deals](#matching-bid-requests-to-deals)
   - [Authorization](#authorization)
@@ -146,8 +146,8 @@ Information about the selection and organization of inventory using technology a
 <a name="get-call"></a>
 # GET Call
 
-<a name="object-buyerstatus"></a>
-## Object: BuyerStatus
+<a name="object-buyerseat"></a>
+## Object: BuyerSeat
 
 Information about the status of the deal in the buying system at a seat level.
 
@@ -158,8 +158,8 @@ Information about the status of the deal in the buying system at a seat level.
 | `buyerseat` | object array | Information about the buying seat where the Deal will be trafficked |
 | `ext` | object | Placeholder for deal-specific extensions |
 
-<a name="object-buyerseat"></a>
-## Object: BuyerSeat
+<a name="object-buyerstatus"></a>
+## Object: BuyerStatus
 
 Information about the buying seat where the Deal will be trafficked
 
