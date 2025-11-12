@@ -86,7 +86,6 @@ An HTTP POST endpoint implemented by the receiving system to accept data pushed 
 | `name` | string, recommended | Name of the deal as created in the origin system. Note: This name may be displayed to the buyer. The person inputting the deal into the `origin` system should consider that when setting up the deal. |
 | `created` | string | UTC timestamp in seconds in ISO-8601 of when the deal was created in the Origin system |
 | `sellerstatus` | int, default 0, recommended | Status of the deal in the sellers system where:<br> `0` = deal is active<br> `1` = deal is paused<br> `2` = deal is archived (cannot be active again) |
-| `buyerstatus` | object | Information about the status of the deal at a seat level in the buying system. <br><br>See [Object: BuyerStatus](#object-buyerstatus) for additional information. |
 | `origin` | string, **required** | The advertising system domain of the business entity that will receive bid responses for the deal, typically the SSP hosting the API. |
 | `seller` | string, recommended | Canonical domain of the business entity who sold the deal. This may be the same as the origin or curator, but it also could be any intermediate seller. <br><br> [See Implementation Guidance for additional detail](#origin-curator-and-seller) |
 | `desc` | string | Short description for the deal to help the receiver locate the deal once it has been sent. It is strongly recommended to keep this field to 250 characters or less. |
@@ -165,7 +164,7 @@ Information about the status of the deal in the buying system at a seat level.
 <a name="object-buyerstatus"></a>
 ## Object: BuyerStatus
 
-Information about the buying seat where the Deal will be trafficked
+Information about the status of the deal at a seat level in the buying system. 
 
 | Attribute | Type | Description |
 |-----------|------|-------------|
