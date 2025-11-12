@@ -75,8 +75,7 @@ This API has multiple implications including lowering manual entry by making the
 
 <a name="deal-api-specification"></a>
 # Deal API Specification
-
-Information about a deal being sent from the Origin system into the Reciving System. 
+An HTTP POST endpoint implemented by the receiving system to accept data pushed from the origin system. Configuration of push calls is out of scope for this specification and is the responsibility of the Origin system.
 
 <a name="object-deal"></a>
 ## Object: Deal
@@ -149,8 +148,7 @@ Information about the selection and organization of inventory using technology a
 
 <a name="reciver-endpoint"></a>
 # Reciving System Endpoint
-
-Endpoint, to be implemented by the reciving system that the origin system can call into for up to date information for a specific deal.
+An HTTP POST endpoint implemented by the receiving system that allows the Origin system to request current information for a specific deal.
 
 <a name="object-buyerseat"></a>
 ## Object: BuyerSeat
