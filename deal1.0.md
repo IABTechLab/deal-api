@@ -76,6 +76,8 @@ This API has multiple implications including lowering manual entry by making the
 <a name="deal-api-specification"></a>
 # Deal API Specification
 
+Information about a deal being sent from the Origin system into the Reciving System. 
+
 <a name="object-deal"></a>
 ## Object: Deal
 
@@ -148,7 +150,7 @@ Information about the selection and organization of inventory using technology a
 <a name="reciver-endpoint"></a>
 # Reciving System Endpoint
 
-Endpoint, to be implemented by the recivign system that the origin system can call into for up to date information for a specific deal.
+Endpoint, to be implemented by the reciving system that the origin system can call into for up to date information for a specific deal.
 
 <a name="object-buyerseat"></a>
 ## Object: BuyerSeat
