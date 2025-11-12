@@ -125,7 +125,7 @@ Attributes in Inventory objects are meant to be an overview of the kinds of ads 
 
 | Attribute | Type | Description |
 |-----------|------|-------------|
-| `inclinventory` | integer array | High-level information about the kind of inventory included in the deal:<br> `1` = site<br> `2` = app<br> `3` = dooh<br> `4` = audio<br> `5` = native<br> `6` = other<br> `7` = all |
+| `inclinventory` | integer array | High-level information about the kind of inventory included in the deal:<br> `1` = site<br> `2` = app<br> `3` = dooh<br> `4` = audio<br> `5` = native<br> `6` = other<br> <br>If this is empty or missing, the deal is assumed to apply to all types of ad creative |
 | `devicetype` | integer array | The general type of device. Refer to List: [Device Type](https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/main/AdCOM%20v1.0%20FINAL.md#list--device-types-) in AdCOM 1.0 |
 | `sellerids` | string array | The identifier associated with the seller or reseller account within the advertising system. This must contain the same value used in transactions (i.e. OpenRTB bid requests) in the field specified by the SSP/exchange. An empty list implies the deal may runs across all sellers. <br><br>Typically, in OpenRTB, this is `publisher.id`. <br><br>For OpenDirect it is typically the publisher's organization ID. Should be limited to 64 characters in length. |
 | `sitedomains` | string array | An array containing one or more site domain(s). |
