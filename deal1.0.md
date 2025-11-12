@@ -86,19 +86,19 @@ An HTTP POST endpoint implemented by the receiving system to accept data pushed 
 | `name` | string, recommended | Name of the deal as created in the origin system. Note: This name may be displayed to the buyer. The person inputting the deal into the `origin` system should consider that when setting up the deal. |
 | `created` | string | UTC timestamp in seconds in ISO-8601 of when the deal was created in the Origin system |
 | `sellerstatus` | int, default 0, recommended | Status of the deal in the sellers system where:<br> `0` = deal is active<br> `1` = deal is paused<br> `2` = deal is archived (cannot be active again) |
-| `buyerstatus` | object | Information about the status of the deal at a seat level in the buying system. See [Object: BuyerStatus](#object-buyerstatus) for additional information. |
+| `buyerstatus` | object | Information about the status of the deal at a seat level in the buying system. <br><br>See [Object: BuyerStatus](#object-buyerstatus) for additional information. |
 | `origin` | string, **required** | The advertising system domain of the business entity that will receive bid responses for the deal, typically the SSP hosting the API. |
-| `seller` | string, recommended | Canonical domain of the business entity who sold the deal. This may be the same as the origin or curator, but it also could be any intermediate seller. [See Implementation Guidance for additional detail](#origin-curator-and-seller) |
+| `seller` | string, recommended | Canonical domain of the business entity who sold the deal. This may be the same as the origin or curator, but it also could be any intermediate seller. <br><br> [See Implementation Guidance for additional detail](#origin-curator-and-seller) |
 | `desc` | string | Short description for the deal to help the receiver locate the deal once it has been sent. It is strongly recommended to keep this field to 250 characters or less. |
 | `wseat` | string array, recommended | Allowed list of buyer seats (e.g., advertisers, agencies) allowed to bid on this impression. <br><br>IDs of seats and knowledge of the buyer's customers to which they refer must be coordinated between bidders and the exchange <i>a priori</i>. <br><br>At most, only one of `wseat` and `bseat` should be used in the same request. Omission of both implies no seat restrictions. |
 | `bseat` | string array | Block list of buyer seats (e.g., advertisers, agencies) restricted from bidding on this impression. IDs of seats and knowledge of the buyer's customers to which they refer must be coordinated between bidders and the exchange <i>a priori</i>. <br><br>At most, only one of `wseat` and `bseat` should be used in the same request. Omission of both implies no seat restrictions.|
-| `adtypes` | int array | The format of the ad creative(s) supported by the inventory in the deal:<br> `1` = Banner<br> `2` = Video<br> `3` = Audio<br> `4` = Native<br>If this is empty or missing, the deal is assumed to apply to all types of ad creative. |
-| `auxdata` | int | Indicates if there is non-publisher data (i.e. a non-publisher data layer) applied in this package with an associated fee where:<br> `0` = undisclosed<br> `1` = yes, at start of deal and will not be modified<br> `2` = yes and subject to change after start of deal<br> `3` = no and will not be modified<br> `4` = no and subject to change after start of deal<br>[See implementation guidance for additional detail](#auxiliary-data) |
+| `adtypes` | int array | The format of the ad creative(s) supported by the inventory in the deal:<br> `1` = Banner<br> `2` = Video<br> `3` = Audio<br> `4` = Native<br><br>If this is empty or missing, the deal is assumed to apply to all types of ad creative. |
+| `auxdata` | int | Indicates if there is non-publisher data (i.e. a non-publisher data layer) applied in this package with an associated fee where:<br> `0` = undisclosed<br> `1` = yes, at start of deal and will not be modified<br> `2` = yes and subject to change after start of deal<br> `3` = no and will not be modified<br> `4` = no and subject to change after start of deal<br><br>[See implementation guidance for additional detail](#auxiliary-data) |
 | `pubcount` | int | Indicates if there is more than one publishing company:<br> `0` = undisclosed<br> `1` = single publisher<br> `2` = multi-publisher<br>[See implementation guidance for additional detail](#publisher-count) |
-| `dinventory` | int | Indicates if the inventory for the deal is dynamic, meaning sites or applications included in the deal may update after the deal is live where:<br> `0` = undisclosed<br> `1` = inventory will NOT update once the deal goes live<br> `2` = inventory where this deal may run is updated dynamically<br>[See implementation guidance for additional detail](#dynamic-inventory) |
+| `dinventory` | int | Indicates if the inventory for the deal is dynamic, meaning sites or applications included in the deal may update after the deal is live where:<br> `0` = undisclosed<br> `1` = inventory will NOT update once the deal goes live<br> `2` = inventory where this deal may run is updated dynamically. <br><br>[See implementation guidance for additional detail](#dynamic-inventory) |
 | `terms` | object, **required** | Terms of the deal. See [Object: Terms](#object-terms) for additional detail |
-| `inventory` | object | Information about the inventory included in the deal. This object should only be included when the deal is for a static set of sites or applications (`dinventory=1`). See [Object: Inventory](#object-inventory) for additional detail |
-| `curation` | object | Information about the curation package if applicable. See [Object: Curation](#object-curation) for additional detail. |
+| `inventory` | object | Information about the inventory included in the deal. This object should only be included when the deal is for a static set of sites or applications (`dinventory=1`). <br><br>See [Object: Inventory](#object-inventory) for additional detail |
+| `curation` | object | Information about the curation package if applicable. <br><br>See [Object: Curation](#object-curation) for additional detail. |
 | `ext` | object | Placeholder for deal-specific extensions |
 
 <a name="object-terms"></a>
@@ -109,12 +109,12 @@ An HTTP POST endpoint implemented by the receiving system to accept data pushed 
 | `startdate` | string | UTC timestamp in seconds in ISO-8601 of when the deal starts |
 | `enddate` | string | UTC timestamp in seconds in ISO-8601 of when the deal ends. Evergreen or always on deals should leave this field blank. |
 | `countries` | string array | An array of country codes in which the deal is available, where country code is a string using ISO-3166-3. If this is empty or missing, the deal is assumed to apply to all countries. |
-| `dealfloor` | float | Minimum bid for impressions for this deal expressed in CPM. Unless `pricetype` is Fixed, this should be used as guidance to buyers. [See Implementation Guidance for additional detail](#price-and-floor-guidance) |
+| `dealfloor` | float | Minimum bid for impressions for this deal expressed in CPM. Unless `pricetype` is Fixed, this should be used as guidance to buyers. <br><br> [See Implementation Guidance for additional detail](#price-and-floor-guidance) |
 | `cur` | string; default "USD" | Bid currency using ISO-4217 alpha codes. |
 | `guar` | int | indicates if the deal is guaranteed where `0` = Guaranteed and `1` = Not Guaranteed |
 | `pricetype` | int, default 2 | Deal Price Type where:<br> `0` = Dynamic (ie. auction type will be provided by `request.at` attribute in OpenRTB Bid Request)<br> `1` = First Price<br> `2` = Second Price Plus<br> `3` = Fixed Price<br>Exchange-specific auction types can be defined using values 500 and greater. |
 | `units` | int | Number of units (impressions) over the specified start and end date of the deal. If the deal is guaranteed, this number should be provided. If the deal is not guaranteed this may be omitted. |
-| `totalcost` | float | The total cost over the specified start and end date of the deal. If the deal is guaranteed, this value should be provided. If the deal is not guaranteed this may be omitted. [See Implementation Guidance for additional detail](#price-and-floor-guidance) |
+| `totalcost` | float | The total cost over the specified start and end date of the deal. If the deal is guaranteed, this value should be provided. If the deal is not guaranteed this may be omitted. <br><br> [See Implementation Guidance for additional detail](#price-and-floor-guidance) |
 | `ext` | object | Placeholder for deal-specific extensions |
 
 <a name="object-inventory"></a>
@@ -124,7 +124,7 @@ Attributes in Inventory objects are meant to be an overview of the kinds of ads 
 
 | Attribute | Type | Description |
 |-----------|------|-------------|
-| `inclinventory` | integer array | High-level information about the kind of inventory included in the deal:<br> `1` = site<br> `2` = app<br> `3` = dooh<br> `4` = audio<br> `5` = native<br> `6` = other<br> <br>If this is empty or missing, the deal is assumed to apply to all types of ad creative |
+| `inclinventory` | integer array | High-level information about the kind of inventory included in the deal:<br> `1` = site<br> `2` = app<br> `3` = dooh<br> `4` = audio<br> `5` = native<br> `6` = other<br> <br><br>If this is empty or missing, the deal is assumed to apply to all types of inventory |
 | `devicetype` | integer array | The general type of device. Refer to List: [Device Type](https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/main/AdCOM%20v1.0%20FINAL.md#list--device-types-) in AdCOM 1.0 |
 | `sellerids` | string array | The identifier associated with the seller or reseller account within the advertising system. If used, the values in this attribute must contain the same value used in transactions (i.e. OpenRTB bid requests) in the field specified by the SSP/exchange. <br><br>An empty list implies the deal may runs across all sellers. <br><br>Typically, in OpenRTB, this is `publisher.id`. <br><br>For OpenDirect it is typically the publisher's organization ID. Should be limited to 64 characters in length. |
 | `sitedomains` | string array | An array containing one or more site domain(s). <br><br>An empty list implies the deal may run across many unspecified site domain(s).|
@@ -141,7 +141,7 @@ Information about the selection and organization of inventory using technology a
 | Attribute | Type | Description |
 |-----------|------|-------------|
 | `curator` | string | Canonical domain of the business entity that did the packaging of inventory, technology and/or data. Most often, this will be the seller of the deal. |
-| `curfeetype` | int | Fee type being applied for curation of the deal:<br> `0` = undisclosed<br> `1` = percentage of spend<br> `2` = flat fee<br> `3` = CPM<br> `4` = no fee is paid for curation services<br>[See Implementation Guidance for additional detail](#curation-fee) |
+| `curfeetype` | int | Fee type being applied for curation of the deal:<br> `0` = undisclosed<br> `1` = percentage of spend<br> `2` = flat fee<br> `3` = CPM<br> `4` = no fee is paid for curation services<br><br>[See Implementation Guidance for additional detail](#curation-fee) |
 | `ext` | object | Placeholder for deal-specific extensions |
 
 ---
