@@ -157,7 +157,7 @@ Information about the status of the deal in the buying system at a seat level.
 |-----------|------|-------------|
 | `version` | string, **required** | Version of the Deal API in use |
 | `id` | string, **required** | A unique identifier for the deal as passed in the initial push that this response is referring to. This should always be the same id as `deal.id` |
-| `buyerseat` | object array | Information about the buying seat where the Deal will be trafficked |
+| `buyerstatus` | object array | Information about the buying seat where the Deal will be trafficked |
 | `ext` | object | Placeholder for deal-specific extensions |
 
 <a name="object-buyerstatus"></a>
