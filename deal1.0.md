@@ -12,7 +12,7 @@
   - [Object: Terms](#object-terms)
   - [Object: Inventory](#object-inventory)
   - [Object: Curation](#object-curation)
-- [GET Call](#get-call)
+- [Reciving System Endpoint](#reciver-endpoint)
   - [Object: BuyerSeat](#object-buyerseat)
   - [Object: BuyerStatus](#object-buyerstatus)
 - [Implementation Guidance](#implementation-guidance)
@@ -145,8 +145,10 @@ Information about the selection and organization of inventory using technology a
 
 ---
 
-<a name="get-call"></a>
-# GET Call
+<a name="reciver-endpoint"></a>
+# Reciving System Endpoint
+
+Endpoint, to be implemented by the recivign system that the origin system can call into for up to date information for a specific deal.
 
 <a name="object-buyerseat"></a>
 ## Object: BuyerSeat
@@ -195,7 +197,7 @@ Supply Chain validation should always be done using Object: Supply Chain from Op
 
 To send information about a new deal, the origin system will send a PUSH request to the receiving system partner's API endpoint.
 
-Once a deal has been sent by the origin system to the receiving system, it may query the endpoint for the status of the Deal using a GET request.
+Once a deal has been sent by the origin system to the receiving system, it may query the endpoint setup by the reciving system for information about the status of the Deal.  
 
 Implementers may choose to accept incoming webhooks to their API endpoints for events. Please discuss this feature and support with your chosen integration partners.
 
