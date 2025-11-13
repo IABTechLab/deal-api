@@ -12,7 +12,7 @@
   - [Object: Terms](#object-terms)
   - [Object: Inventory](#object-inventory)
   - [Object: Curation](#object-curation)
-- [Reciving System Endpoint](#reciver-endpoint)
+- [Receiving System Endpoint](#receiver-endpoint)
   - [Object: BuyerSeat](#object-buyerseat)
   - [Object: BuyerStatus](#object-buyerstatus)
 - [Implementation Guidance](#implementation-guidance)
@@ -51,7 +51,7 @@ This API has multiple implications including lowering manual entry by making the
 <a name="what-it-is"></a>
 ## What it is
 
-- API that provides subscribers with static information about a given Deal that outlines the tenants of the Deal.
+- API that provides subscribers with static information about a given Deal that outlines the tenents of the Deal.
 - This MVP is a one-party design for the origin system to PUSH information about the deal into the receiving system(s) from the system where it was created (e.g. SSP → DSP). It also allows the same system to query the receiving system for the Deal status after initial deal send. Future versions will likely add support for bi-directional communications.
 - Version 1.0 of this API does not support differential overrides
 
@@ -145,8 +145,8 @@ Information about the selection and organization of inventory using technology a
 
 ---
 
-<a name="reciver-endpoint"></a>
-# Reciving System Endpoint
+<a name="receiver-endpoint"></a>
+# Receiving System Endpoint
 An HTTP POST endpoint implemented by the receiving system that allows the Origin system to request current information for a specific deal.
 
 <a name="object-buyerseat"></a>
@@ -196,7 +196,7 @@ Supply Chain validation should always be done using Object: Supply Chain from Op
 
 To send information about a new deal, the origin system will send a PUSH request to the receiving system partner's API endpoint.
 
-Once a deal has been sent by the origin system to the receiving system, it may query the endpoint setup by the reciving system for information about the status of the Deal.  
+Once a deal has been sent by the origin system to the receiving system, it may query the endpoint setup by the receiving system for information about the status of the Deal.  
 
 Implementers may choose to accept incoming webhooks to their API endpoints for events. Please discuss this feature and support with your chosen integration partners.
 
