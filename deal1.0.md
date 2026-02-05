@@ -11,6 +11,7 @@
   - [Object: Deal](#object-deal)
   - [Object: Terms](#object-terms)
   - [Object: Inventory](#object-inventory)
+  - [Object: Content](#object-content)
   - [Object: Curation](#object-curation)
 - [Receiving System Endpoint](#receiver-endpoint)
   - [Object: BuyerSeat](#object-buyerseat)
@@ -85,7 +86,7 @@ An HTTP POST endpoint implemented by the receiving system to accept data pushed 
 | `id` | string; **required** | A unique identifier for the direct deal in origin's namespace. |
 | `name` | string, recommended | Name of the deal as created in the origin system. Note: This name may be displayed to the buyer. The person inputting the deal into the `origin` system should consider that when setting up the deal. |
 | `created` | string | UTC timestamp in seconds in ISO-8601 of when the deal was created in the Origin system |
-| `sellerstatus` | int, default 0, recommended | Status of the deal in the sellers system where:<br> `0` = deal is active<br> `1` = deal is paused<br> `2` = deal is archived (cannot be active again) |
+| `sellerstatus` | int, default 0, recommended | Status of the deal in the sellers system where:<br> `0` = deal is active<br> `1` = deal is paused<br> `2` = deal is pending<br>  `3` = deal is archived (cannot be active again) |
 | `origin` | string, **required** | The advertising system domain of the business entity that will receive bid responses for the deal, typically the SSP hosting the API. |
 | `seller` | string, recommended | Canonical domain of the business entity who sold the deal. This may be the same as the origin or curator, but it also could be any intermediate seller. <br><br> [See Implementation Guidance for additional detail](#origin-curator-and-seller) |
 | `desc` | string | Short description for the deal to help the receiver locate the deal once it has been sent. It is strongly recommended to keep this field to 250 characters or less. |
@@ -132,6 +133,10 @@ Attributes in Inventory objects are meant to be an overview of the kinds of ads 
 | `cattax` | integer | The taxonomy in use for the cat attribute. Refer to [List: Category Taxonomies](https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/main/AdCOM%20v1.0%20FINAL.md#list_categorytaxonomies). |
 | `ext` | object | Placeholder for deal-specific extensions |
 
+<a name="object-content"></a>
+## Object: Content
+Refer to [Object: Content from AdCOM 1.0](https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/main/AdCOM%20v1.0%20FINAL.md#object--content-) for specific values.
+
 <a name="object-curation"></a>
 ## Object: Curation
 
@@ -140,6 +145,7 @@ Information about the selection and organization of inventory using technology a
 | Attribute | Type | Description |
 |-----------|------|-------------|
 | `curator` | string | Canonical domain of the business entity that did the packaging of inventory, technology and/or data. Most often, this will be the seller of the deal. |
+| `cdealid` | string | Unique identifier for the deal in the Curators namespace. |
 | `curfeetype` | int | Fee type being applied for curation of the deal:<br> `0` = undisclosed<br> `1` = percentage of spend<br> `2` = flat fee<br> `3` = CPM<br> `4` = no fee is paid for curation services<br><br>[See Implementation Guidance for additional detail](#curation-fee) |
 | `ext` | object | Placeholder for deal-specific extensions |
 
