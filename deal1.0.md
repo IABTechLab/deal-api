@@ -192,6 +192,8 @@ Version 1.0 of this API does not support deal revisions. However, some attribute
 
 The `deal.id` from both the sender and receiver should match the `deal.id` in the OpenRTB request when bidding. Implementers should use the Deal ID from the Origin system that did the PUSH.
 
+Implementers are strongly encouraged to discuss where targeting criteria will be set. In instances where additional targeting will be applied in the receiving system, implementers should discuss potential implicaitons to delivery if sources of targeting may differ.
+
 <a name="authorization"></a>
 ## Authorization
 
