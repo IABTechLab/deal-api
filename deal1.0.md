@@ -11,7 +11,6 @@
   - [Object: Deal](#object-deal)
   - [Object: Terms](#object-terms)
   - [Object: Inventory](#object-inventory)
-  - [Object: Content](#object-content)
   - [Object: Curation](#object-curation)
 - [Receiving System Endpoint](#receiver-endpoint)
   - [Object: BuyerSeat](#object-buyerseat)
@@ -54,7 +53,7 @@ This API has multiple implications including lowering manual entry by making the
 
 - API that provides subscribers with static information about a given Deal that outlines the tenents of the Deal.
 - This MVP is a one-party design for the origin system to PUSH information about the deal into the receiving system(s) from the system where it was created (e.g. SSP → DSP). It also allows the same system to query the receiving system for the Deal status after initial deal send. Future versions will likely add support for bi-directional communications.
-- Version 1.0 of this API does not support differential overrides
+- Version 1.0 of this API does not support differential overrides, but 1.1 will. For the 1.0 version, periodic polling by the deal receiver can be used as a fallback. To ensure data integrity, deal receivers are encouraged to implement periodic polling as a fallback mechanism to handle any missed notifications.
 
 <a name="what-it-isnt"></a>
 ## What it isn't
@@ -86,7 +85,7 @@ An HTTP POST endpoint implemented by the receiving system to accept data pushed 
 | `id` | string; **required** | A unique identifier for the direct deal in origin's namespace. |
 | `name` | string, recommended | Name of the deal as created in the origin system. Note: This name may be displayed to the buyer. The person inputting the deal into the `origin` system should consider that when setting up the deal. |
 | `created` | string | UTC timestamp in seconds in ISO-8601 of when the deal was created in the Origin system |
-| `sellerstatus` | int, default 0, recommended | Status of the deal in the sellers system where:<br> `0` = deal is active<br> `1` = deal is paused<br> `2` = deal is pending<br>  `3` = deal is archived (cannot be active again) |
+| `sellerstatus` | int, default 0, recommended | Status of the deal in the sellers system where:<br> `0` = deal is active<br> `1` = deal is paused<br> `2` = deal is pending<br>  `4` = deal is complete (ie. selling scomplete (ie. selling system shows deal has completed)<br>  `4` = deal is archived (cannot be active again) |
 | `origin` | string, **required** | The advertising system domain of the business entity that will receive bid responses for the deal, typically the SSP hosting the API. |
 | `seller` | string, recommended | Canonical domain of the business entity who sold the deal. This may be the same as the origin or curator, but it also could be any intermediate seller. <br><br> [See Implementation Guidance for additional detail](#origin-curator-and-seller) |
 | `desc` | string | Short description for the deal to help the receiver locate the deal once it has been sent. It is strongly recommended to keep this field to 250 characters or less. |
@@ -111,7 +110,7 @@ An HTTP POST endpoint implemented by the receiving system to accept data pushed 
 | `countries` | string array | An array of country codes in which the deal is available, where country code is a string using ISO-3166-3. If this is empty or missing, the deal is assumed to apply to all countries. |
 | `dealfloor` | float | Minimum bid for impressions for this deal expressed in CPM. Unless `pricetype` is Fixed, this should be used as guidance to buyers. <br><br> [See Implementation Guidance for additional detail](#price-and-floor-guidance) |
 | `cur` | string; default "USD" | Bid currency using ISO-4217 alpha codes. |
-| `guar` | int | indicates if the deal is guaranteed where `0` = Guaranteed and `1` = Not Guaranteed |
+| `guar` | int | Indicates that the deal is of type guaranteed and the bidder must bid on the deal, where 0 = not a guaranteed deal, 1 = guaranteed deal. |
 | `pricetype` | int, default 2 | Deal Price Type where:<br> `0` = Dynamic (ie. auction type will be provided by `request.at` attribute in OpenRTB Bid Request)<br> `1` = First Price<br> `2` = Second Price Plus<br> `3` = Fixed Price<br>Exchange-specific auction types can be defined using values 500 and greater. |
 | `units` | int | Number of units (impressions) over the specified start and end date of the deal. If the deal is guaranteed, this number should be provided. If the deal is not guaranteed this may be omitted. |
 | `totalcost` | float | The total cost over the specified start and end date of the deal. If the deal is guaranteed, this value should be provided. If the deal is not guaranteed this may be omitted. <br><br> [See Implementation Guidance for additional detail](#price-and-floor-guidance) |
@@ -133,9 +132,6 @@ Attributes in Inventory objects are meant to be an overview of the kinds of ads 
 | `cattax` | integer | The taxonomy in use for the cat attribute. Refer to [List: Category Taxonomies](https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/main/AdCOM%20v1.0%20FINAL.md#list_categorytaxonomies). |
 | `ext` | object | Placeholder for deal-specific extensions |
 
-<a name="object-content"></a>
-## Object: Content
-Refer to [Object: Content from AdCOM 1.0](https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/main/AdCOM%20v1.0%20FINAL.md#object--content-) for specific values.
 
 <a name="object-curation"></a>
 ## Object: Curation
@@ -175,7 +171,7 @@ Information about the status of the deal at a seat level in the buying system.
 | Attribute | Type | Description |
 |-----------|------|-------------|
 | `buyerseatid` | string | Seat ID in the buying system that the response refers to |
-| `status` | int | Status of the deal in the buying system:<br> `0` = pending approval<br> `1` = buyer has approved (ie. non PG deal is ready for bid requests)<br> `2` = buyer has rejected<br> `3` = ready to serve (ie. deal is in a campaign - ready to receive bid requests, relevant especially for PG deals)<br> `4` = active (i.e. deal is actively serving impressions)<br> `5` = paused |
+| `status` | int | Status of the deal in the buying system:<br> `0` = pending approval<br> `1` = buyer has approved (ie. non PG deal is ready for bid requests)<br> `2` = buyer has rejected<br> `3` = ready to serve (ie. deal is in a campaign - ready to receive bid requests, relevant especially for PG deals)<br> `4` = active (i.e. deal is actively serving impressions)<br> `5` = paused<br> `6` = complete (ie. buying system shows deal has completed)|
 | `ext` | object | Placeholder for deal-specific extensions |
 
 ---
